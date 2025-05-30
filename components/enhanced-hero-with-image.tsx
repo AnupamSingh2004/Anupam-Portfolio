@@ -470,7 +470,7 @@ export function EnhancedHeroWithImage({ setCursorVariant }: EnhancedHeroWithImag
                 
                 {/* Profile Image - High Quality */}
                 <Image
-                  src="/profile.png"
+                  src="./profile.png"
                   alt="Anupam Singh"
                   width={500}
                   height={500}
