@@ -7,6 +7,7 @@ export function AwardWinningLoading() {
   const [loadingProgress, setLoadingProgress] = useState(0)
   const [currentPhase, setCurrentPhase] = useState(0)
   const [isComplete, setIsComplete] = useState(false)
+  const [windowSize, setWindowSize] = useState({ width: 1200, height: 800 }) // Default fallback values
 
   const phases = [
     { text: "Initializing", duration: 500 },
@@ -14,6 +15,24 @@ export function AwardWinningLoading() {
     { text: "Preparing Experience", duration: 700 },
     { text: "Almost Ready", duration: 400 },
   ]
+
+  // Handle window resize and initial size
+  useEffect(() => {
+    const updateWindowSize = () => {
+      setWindowSize({
+        width: window.innerWidth,
+        height: window.innerHeight,
+      })
+    }
+
+    // Set initial size
+    updateWindowSize()
+
+    // Add resize listener
+    window.addEventListener('resize', updateWindowSize)
+    
+    return () => window.removeEventListener('resize', updateWindowSize)
+  }, [])
 
   useEffect(() => {
     let progress = 0
@@ -92,15 +111,15 @@ export function AwardWinningLoading() {
             key={i}
             className="absolute w-2 h-2 bg-white/20 rounded-full"
             initial={{
-              x: Math.random() * window.innerWidth,
-              y: Math.random() * window.innerHeight,
+              x: Math.random() * windowSize.width,
+              y: Math.random() * windowSize.height,
               opacity: 0,
             }}
             animate={{
               y: [
-                Math.random() * window.innerHeight,
-                Math.random() * window.innerHeight,
-                Math.random() * window.innerHeight,
+                Math.random() * windowSize.height,
+                Math.random() * windowSize.height,
+                Math.random() * windowSize.height,
               ],
               opacity: [0, 1, 0],
               scale: [0, 1, 0],

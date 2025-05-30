@@ -47,10 +47,16 @@ export default function Page() {
   const [activeSection, setActiveSection] = useState("about")
   const [isMenuOpen, setIsMenuOpen] = useState(false)
   const [isLoading, setIsLoading] = useState(true)
+    const [scrollHeight, setScrollHeight] = useState(0);
   const { scrollY } = useScroll()
   const headerOpacity = useTransform(scrollY, [0, 100], [1, 0.95])
   const headerBlur = useTransform(scrollY, [0, 100], [0, 12])
-  const scrollProgress = useTransform(scrollY, [0, document.body.scrollHeight - window.innerHeight], [0, 1])
+
+  const scrollProgress = useTransform(
+    scrollY, 
+    [0, scrollHeight > 0 ? scrollHeight : 1000], 
+    [0, 1]
+  )
 
   const aboutRef = useRef<HTMLDivElement>(null)
   const projectsRef = useRef<HTMLDivElement>(null)
@@ -74,6 +80,37 @@ export default function Page() {
     window.addEventListener("scroll", handleScroll)
     return () => window.removeEventListener("scroll", handleScroll)
   }, [])
+
+
+   useEffect(() => {
+    const updateScrollHeight = () => {
+      // Calculate the total scrollable height
+      const totalHeight = document.documentElement.scrollHeight - window.innerHeight
+      setScrollHeight(totalHeight)
+    }
+
+    // Update on mount
+    updateScrollHeight()
+
+    // Update on window resize
+    window.addEventListener('resize', updateScrollHeight)
+    
+    // Optional: Update when content changes (useful for dynamic content)
+    const resizeObserver = new ResizeObserver(() => {
+      updateScrollHeight()
+    })
+    
+    // Observe the document body for size changes
+    if (document.body) {
+      resizeObserver.observe(document.body)
+    }
+
+    return () => {
+      window.removeEventListener('resize', updateScrollHeight)
+      resizeObserver.disconnect()
+    }
+  }, [])
+  
 useEffect(() => {
   const handleScroll = () => {
     const scrollPosition = window.scrollY + 150 // Increased offset for better detection
