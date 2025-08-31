@@ -3,15 +3,16 @@
 import { useEffect, useRef, useState } from "react"
 import { motion, useScroll, useTransform, AnimatePresence, useSpring } from "framer-motion"
 import Image from "next/image"
-import { navItems, projects, moreProjects, contactInfo } from "@/lib/data"
+import { navItems, projects, moreProjects, contactInfo, largeScaleProject, ongoingProjects } from "@/lib/data"
 import { cn } from "@/lib/utils"
-import { ExternalLink, Github, Menu, X, User, Code, Briefcase, Mail, ChevronDown } from "lucide-react"
+import { ExternalLink, Github, Menu, X, User, Code, Briefcase, Mail, ChevronDown, Award } from "lucide-react"
 import { AwardWinningLoading } from "@/components/award-winning-loading"
 import { TechnologiesSection } from "@/components/technologies-section"
 import { CreativeAboutSection } from "@/components/creative-about-section"
 import {  EnhancedHeroWithImage} from "@/components/enhanced-hero-with-image"
 import { SocialProfilesSection } from "@/components/social-profiles-section"
 import { ContactSection } from "@/components/contact-section"
+import { CertificatesSection } from "@/components/certificates-section"
 
 // Technology icon mapping
 const techIconMap: Record<string, string> = {
@@ -32,6 +33,9 @@ const techIconMap: Record<string, string> = {
   "/github.svg": "🐙",
   "/javascript.svg": "🟨",
   "/optimization.svg": "⚡",
+  "/postgresql.svg": "🐘",
+  "/docker.svg": "🐳",
+  "/flutter.svg": "💙",
 }
 
 // Navigation icons
@@ -39,6 +43,7 @@ const navIcons = {
   About: User,
   Technologies: Code,
   Projects: Briefcase,
+  Certificates: Award,
   Experience: Briefcase,
   Contact: Mail,
 }
@@ -60,6 +65,7 @@ export default function Page() {
 
   const aboutRef = useRef<HTMLDivElement>(null)
   const projectsRef = useRef<HTMLDivElement>(null)
+  const certificatesRef = useRef<HTMLDivElement>(null)
   const experienceRef = useRef<HTMLDivElement>(null)
   const technologiesRef = useRef<HTMLDivElement>(null)
   const contactRef = useRef<HTMLDivElement>(null)
@@ -119,6 +125,7 @@ useEffect(() => {
       { id: "about", ref: aboutRef },
       { id: "technologies", ref: technologiesRef },
       { id: "projects", ref: projectsRef },
+      { id: "certificates", ref: certificatesRef },
       { id: "experience", ref: experienceRef },
       {id:"contact", ref:contactRef},
     ]
@@ -480,114 +487,181 @@ useEffect(() => {
             </p>
           </motion.div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-            {projects.map((project, index) => (
-              <motion.div
-                key={project.id}
-                initial={{ opacity: 0, y: 30 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true, margin: "-100px" }}
-                transition={{ duration: 0.8, delay: index * 0.1, ease: [0.16, 1, 0.3, 1] }}
-                className="group relative"
-                onMouseEnter={() => setCursorVariant("text")}
-                onMouseLeave={() => setCursorVariant("default")}
-              >
-                <div className="relative overflow-hidden rounded-xl mb-6 aspect-video bg-gray-900">
-                  <div className="absolute inset-0 bg-gradient-to-t from-black via-transparent to-transparent z-10" />
-                  <motion.div
-                    whileHover={{ scale: 1.05 }}
-                    transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
-                    className="w-full h-full"
-                  >
-                    <Image
-                      src={project.img || "/placeholder.svg"}
-                      alt={project.title}
-                      width={800}
-                      height={600}
-                      className="w-full h-full object-cover"
-                    />
-                  </motion.div>
-
-                  {/* Project overlay content with emoji technology icons */}
-                  <div className="absolute bottom-0 left-0 right-0 p-6 z-20">
-                    <h3 className="text-xl md:text-2xl font-bold mb-3 text-white">{project.title}</h3>
-                    <div className="flex gap-2 mb-4">
-                      {project.iconLists.slice(0, 5).map((iconPath, i) => (
-                        <motion.div
-                          key={i}
-                          className="w-12 h-12 bg-black/80 backdrop-blur-sm rounded-full flex items-center justify-center shadow-lg border border-purple-500/30"
-                          whileHover={{ y: -5, scale: 1.2 }}
-                          transition={{ type: "spring", stiffness: 500 }}
-                        >
-                          <span className="text-2xl">{techIconMap[iconPath] || "⚡"}</span>
-                        </motion.div>
-                      ))}
-                    </div>
+          {/* Large Scale Project Section */}
+          <div className="mb-16">
+            <h3 className="text-2xl font-bold mb-6 text-purple-400 text-center">Large Projects</h3>
+            <motion.div
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, margin: "-100px" }}
+              transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
+              className="group relative"
+              onMouseEnter={() => setCursorVariant("text")}
+              onMouseLeave={() => setCursorVariant("default")}
+            >
+              <div className="relative overflow-hidden rounded-xl mb-6 aspect-video bg-gray-900">
+                <Image
+                  src={largeScaleProject.img || "/placeholder.svg"}
+                  alt={largeScaleProject.title}
+                  width={800}
+                  height={600}
+                  className="w-full h-full object-cover"
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/40 to-transparent z-10" />
+                <div className="absolute bottom-0 left-0 right-0 p-6 z-20">
+                  <h3 className="text-xl md:text-2xl font-bold mb-3 text-white drop-shadow-lg">{largeScaleProject.title}</h3>
+                  <div className="flex gap-2 mb-4">
+                    {largeScaleProject.iconLists.map((iconPath, i) => (
+                      <span key={i} className="w-12 h-12 bg-black/80 backdrop-blur-sm rounded-full flex items-center justify-center shadow-lg border border-purple-500/30 text-2xl">{techIconMap[iconPath] || "⚡"}</span>
+                    ))}
                   </div>
-
-                  {/* Hover overlay */}
-                  <motion.div
-                    initial={{ opacity: 0 }}
-                    whileHover={{ opacity: 1 }}
-                    transition={{ duration: 0.4, ease: [0.16, 1, 0.3, 1] }}
-                    className="absolute inset-0 bg-black/80 z-30 flex flex-col justify-center items-center p-6 text-center"
-                  >
-                    <h3 className="text-xl font-bold mb-3 text-white">{project.title}</h3>
-                    <p className="text-gray-300 mb-6 max-w-md text-sm leading-relaxed">
-                      {moreProjects[index]?.quote || project.des}
-                    </p>
-                    <div className="flex gap-3">
-                      <a
-                        href={project.link}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="px-4 py-2 bg-purple-600 hover:bg-purple-700 rounded-full text-sm font-medium transition-colors flex items-center text-white"
-                      >
-                        View Code <Github className="ml-2 h-4 w-4" />
-                      </a>
-                      {project.liveLink && (
-                        <a
-                          href={project.liveLink}
-                          target="_blank"
-                          rel="noopener noreferrer"
-                          className="px-4 py-2 bg-gray-800 hover:bg-gray-700 rounded-full text-sm font-medium transition-colors flex items-center text-white"
-                        >
-                          Live Demo <ExternalLink className="ml-2 h-4 w-4" />
-                        </a>
-                      )}
-                    </div>
-                  </motion.div>
                 </div>
-
-                {/* Project description */}
-                <div className="space-y-4">
-                  <p className="text-gray-300 leading-relaxed">{project.des}</p>
-                  <div className="flex gap-4">
-                    <a
-                      href={project.link}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="inline-flex items-center text-purple-400 hover:text-purple-300 transition-colors font-medium"
-                    >
-                      View Code <Github className="ml-2 h-4 w-4" />
-                    </a>
-                    {project.liveLink && (
-                      <a
-                        href={project.liveLink}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="inline-flex items-center text-gray-400 hover:text-gray-300 transition-colors font-medium"
-                      >
-                        Live Demo <ExternalLink className="ml-2 h-4 w-4" />
-                      </a>
+                <div className="absolute inset-0 bg-black/80 z-30 flex flex-col justify-center items-center p-6 text-center opacity-0 group-hover:opacity-100 transition-opacity duration-400">
+                  <h3 className="text-xl font-bold mb-3 text-white">{largeScaleProject.title}</h3>
+                  <p className="text-gray-300 mb-6 max-w-md text-sm leading-relaxed">{largeScaleProject.des}</p>
+                  <div className="flex gap-3">
+                    <a href={largeScaleProject.link} target="_blank" rel="noopener noreferrer" className="px-4 py-2 bg-purple-600 hover:bg-purple-700 rounded-full text-sm font-medium transition-colors flex items-center text-white">View Code <Github className="ml-2 h-4 w-4" /></a>
+                    {largeScaleProject.liveLink && (
+                      <a href={largeScaleProject.liveLink} target="_blank" rel="noopener noreferrer" className="px-4 py-2 bg-gray-800 hover:bg-gray-700 rounded-full text-sm font-medium transition-colors flex items-center text-white">Live Demo <ExternalLink className="ml-2 h-4 w-4" /></a>
                     )}
                   </div>
                 </div>
-              </motion.div>
-            ))}
+              </div>
+              <div className="space-y-4">
+                <p className="text-gray-300 leading-relaxed">{largeScaleProject.des}</p>
+                <div className="flex gap-4">
+                  <a href={largeScaleProject.link} target="_blank" rel="noopener noreferrer" className="inline-flex items-center text-purple-400 hover:text-purple-300 transition-colors font-medium">View Code <Github className="ml-2 h-4 w-4" /></a>
+                  {largeScaleProject.liveLink && (
+                    <a href={largeScaleProject.liveLink} target="_blank" rel="noopener noreferrer" className="inline-flex items-center text-gray-400 hover:text-gray-300 transition-colors font-medium">Live Demo <ExternalLink className="ml-2 h-4 w-4" /></a>
+                  )}
+                </div>
+              </div>
+            </motion.div>
+          </div>
+
+          {/* Ongoing Projects Section */}
+          <div className="mb-16">
+            <h3 className="text-2xl font-bold mb-6 text-pink-400 text-center">Ongoing Projects</h3>
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+              {ongoingProjects.map((project, index) => (
+                <motion.div
+                  key={project.id}
+                  initial={{ opacity: 0, y: 30 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true, margin: "-100px" }}
+                  transition={{ duration: 0.8, delay: index * 0.1, ease: [0.16, 1, 0.3, 1] }}
+                  className="group relative"
+                  onMouseEnter={() => setCursorVariant("text")}
+                  onMouseLeave={() => setCursorVariant("default")}
+                >
+                  <div className="relative overflow-hidden rounded-xl mb-6 aspect-video bg-gray-900">
+                    <Image src={project.img || "/placeholder.svg"} alt={project.title} width={800} height={600} className="w-full h-full object-cover" />
+                    <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/40 to-transparent z-10" />
+                    <div className="absolute bottom-0 left-0 right-0 p-6 z-20">
+                      <h3 className="text-xl md:text-2xl font-bold mb-3 text-white drop-shadow-lg">{project.title}</h3>
+                      <div className="flex gap-2 mb-4">
+                        {project.iconLists.map((iconPath, i) => (
+                          <span key={i} className="w-12 h-12 bg-black/80 backdrop-blur-sm rounded-full flex items-center justify-center shadow-lg border border-pink-500/30 text-2xl">{techIconMap[iconPath] || "⚡"}</span>
+                        ))}
+                      </div>
+                    </div>
+                    <div className="absolute inset-0 bg-black/80 z-30 flex flex-col justify-center items-center p-6 text-center opacity-0 group-hover:opacity-100 transition-opacity duration-400">
+                      <h3 className="text-xl font-bold mb-3 text-white">{project.title}</h3>
+                      <p className="text-gray-300 mb-6 max-w-md text-sm leading-relaxed">{project.des}</p>
+                      <div className="flex gap-3">
+                        <a href={project.link} target="_blank" rel="noopener noreferrer" className="px-4 py-2 bg-pink-600 hover:bg-pink-700 rounded-full text-sm font-medium transition-colors flex items-center text-white">View Code <Github className="ml-2 h-4 w-4" /></a>
+                        {project.liveLink && (
+                          <a href={project.liveLink} target="_blank" rel="noopener noreferrer" className="px-4 py-2 bg-gray-800 hover:bg-gray-700 rounded-full text-sm font-medium transition-colors flex items-center text-white">Live Demo <ExternalLink className="ml-2 h-4 w-4" /></a>
+                        )}
+                      </div>
+                    </div>
+                  </div>
+                  <div className="space-y-4">
+                    <p className="text-gray-300 leading-relaxed">{project.des}</p>
+                    <div className="flex gap-4">
+                      <a href={project.link} target="_blank" rel="noopener noreferrer" className="inline-flex items-center text-pink-400 hover:text-pink-300 transition-colors font-medium">View Code <Github className="ml-2 h-4 w-4" /></a>
+                      {project.liveLink && (
+                        <a href={project.liveLink} target="_blank" rel="noopener noreferrer" className="inline-flex items-center text-gray-400 hover:text-gray-300 transition-colors font-medium">Live Demo <ExternalLink className="ml-2 h-4 w-4" /></a>
+                      )}
+                    </div>
+                  </div>
+                </motion.div>
+              ))}
+            </div>
+          </div>
+
+          {/* Projects Section */}
+          <div>
+            <h3 className="text-2xl font-bold mb-6 text-cyan-400 text-center">More Projects</h3>
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+              {projects.map((project, index) => (
+                <motion.div
+                  key={project.id}
+                  initial={{ opacity: 0, y: 30 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true, margin: "-100px" }}
+                  transition={{ duration: 0.8, delay: index * 0.1, ease: [0.16, 1, 0.3, 1] }}
+                  className="group relative"
+                  onMouseEnter={() => setCursorVariant("text")}
+                  onMouseLeave={() => setCursorVariant("default")}
+                >
+                  <div className="relative overflow-hidden rounded-xl mb-6 aspect-video bg-gray-900">
+                    {project.id === "aarogyarekha" ? (
+                      /* Mobile app with centered display */
+                      <div className="w-full h-full flex items-center justify-center bg-gradient-to-br from-teal-900/20 via-gray-900 to-cyan-900/20">
+                        <div className="w-1/2 h-full flex items-center justify-center">
+                          <Image src={project.img || "/placeholder.svg"} alt={project.title} width={400} height={700} className="max-w-full max-h-full object-contain" />
+                        </div>
+                      </div>
+                    ) : (
+                      /* Regular web app */
+                      <Image src={project.img || "/placeholder.svg"} alt={project.title} width={800} height={600} className="w-full h-full object-cover" />
+                    )}
+                    <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/40 to-transparent z-10" />
+                    <div className="absolute bottom-0 left-0 right-0 p-6 z-20">
+                      <div className="flex items-center gap-2 mb-2">
+                        <h3 className="text-xl md:text-2xl font-bold text-white drop-shadow-lg">{project.title}</h3>
+                        {project.id === "aarogyarekha" && (
+                          <span className="px-2 py-1 bg-teal-600/80 backdrop-blur-sm rounded-full text-xs font-medium text-white">📱 Mobile</span>
+                        )}
+                      </div>
+                      <div className="flex gap-2 mb-4">
+                        {project.iconLists.map((iconPath, i) => (
+                          <span key={i} className="w-12 h-12 bg-black/80 backdrop-blur-sm rounded-full flex items-center justify-center shadow-lg border border-cyan-500/30 text-2xl">{techIconMap[iconPath] || "⚡"}</span>
+                        ))}
+                      </div>
+                    </div>
+                    <div className="absolute inset-0 bg-black/80 z-30 flex flex-col justify-center items-center p-6 text-center opacity-0 group-hover:opacity-100 transition-opacity duration-400">
+                      <h3 className="text-xl font-bold mb-3 text-white">{project.title}</h3>
+                      <p className="text-gray-300 mb-6 max-w-md text-sm leading-relaxed">{project.des}</p>
+                      <div className="flex gap-3">
+                        <a href={project.link} target="_blank" rel="noopener noreferrer" className="px-4 py-2 bg-cyan-600 hover:bg-cyan-700 rounded-full text-sm font-medium transition-colors flex items-center text-white">View Code <Github className="ml-2 h-4 w-4" /></a>
+                        {project.liveLink && (
+                          <a href={project.liveLink} target="_blank" rel="noopener noreferrer" className="px-4 py-2 bg-gray-800 hover:bg-gray-700 rounded-full text-sm font-medium transition-colors flex items-center text-white">Live Demo <ExternalLink className="ml-2 h-4 w-4" /></a>
+                        )}
+                      </div>
+                    </div>
+                  </div>
+                  <div className="space-y-4">
+                    <p className="text-gray-300 leading-relaxed">{project.des}</p>
+                    <div className="flex gap-4">
+                      <a href={project.link} target="_blank" rel="noopener noreferrer" className="inline-flex items-center text-cyan-400 hover:text-cyan-300 transition-colors font-medium">View Code <Github className="ml-2 h-4 w-4" /></a>
+                      {project.liveLink && (
+                        <a href={project.liveLink} target="_blank" rel="noopener noreferrer" className="inline-flex items-center text-gray-400 hover:text-gray-300 transition-colors font-medium">Live Demo <ExternalLink className="ml-2 h-4 w-4" /></a>
+                      )}
+                    </div>
+                  </div>
+                </motion.div>
+              ))}
+            </div>
           </div>
         </div>
       </section>
+
+      {/* Certificates Section */}
+      <div id="certificates" ref={certificatesRef}>
+        <CertificatesSection setCursorVariant={setCursorVariant} />
+      </div>
 
       {/* Experience Section */}
 {/* Enhanced Experience Section */}

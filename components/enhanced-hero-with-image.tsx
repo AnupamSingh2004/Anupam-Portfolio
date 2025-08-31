@@ -317,7 +317,7 @@ export function EnhancedHeroWithImage({ setCursorVariant }: EnhancedHeroWithImag
               onMouseEnter={() => setCursorVariant("text")}
               onMouseLeave={() => setCursorVariant("default")}
             >
-              Full-Stack Developer specializing in Next.js, API development, and Backend Architecture
+              Full-Stack Developer specializing in Next.js, API development, Backend Architecture and DevOps
               <motion.span
                 className="inline-block w-0.5 h-6 bg-purple-400 ml-1"
                 animate={{ opacity: [0, 1, 0] }}

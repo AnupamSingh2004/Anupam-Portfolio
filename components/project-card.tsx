@@ -60,7 +60,7 @@ export function ProjectCard({ project, details, index, setCursorVariant }: Proje
             {project.iconLists.map((icon, i) => (
               <motion.div
                 key={i}
-                className="w-8 h-8 bg-black/60 backdrop-blur-sm rounded-full p-1.5"
+                className="w-8 h-8 bg-black/60 backdrop-blur-sm rounded-full p-1.5 border-2 border-white"
                 whileHover={{ y: -5, scale: 1.2 }}
                 transition={{ type: "spring", stiffness: 500 }}
               >
@@ -154,7 +154,7 @@ export function ProjectCard({ project, details, index, setCursorVariant }: Proje
                 <h4 className="text-lg font-semibold mb-2">Technologies</h4>
                 <div className="flex flex-wrap gap-2">
                   {project.iconLists.map((icon, i) => (
-                    <div key={i} className="flex items-center bg-gray-800 px-3 py-1 rounded-full">
+                    <div key={i} className="flex items-center bg-gray-800 px-3 py-1 rounded-full border-2 border-white">
                       <Image
                         src={icon || "/placeholder.svg"}
                         alt="Technology"

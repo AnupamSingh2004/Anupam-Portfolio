@@ -2,6 +2,7 @@ export const navItems = [
   { name: "About", link: "#about" },
   { name: "Technologies", link: "#technologies" },
   { name: "Projects", link: "#projects" },
+  { name: "Certificates", link: "#certificates" },
   { name: "Experience", link: "#experience" },
   { name: "Contact", link: "#contact" },
 ]
@@ -49,7 +50,64 @@ export const gridItems = [
   },
 ]
 
+// Large Scale Project
+export const largeScaleProject = {
+  id: "juris-lead",
+  title: "Juris-Lead - IPC Justice Aid 🏛️⚖️",
+  des:
+    "Democratizing access to justice through AI-powered legal analysis of Indian Penal Code. Juris-Lead is a comprehensive legal-tech platform providing free AI-powered legal case analysis for citizens and lead generation for legal professionals. Built with Flutter, Next.js, Django, Docker, and Ollama AI.",
+  img: "./projects/Juris-Lead.png",
+  iconLists: ["/django.svg", "/flutter.svg", "/next.svg", "/docker.svg", "/ai.svg"],
+  link: "https://github.com/AnupamSingh2004/Juris-Lead",
+  liveLink: "https://juris-lead.vercel.app/",
+}
+
+// Ongoing Projects
+export const ongoingProjects = [
+  {
+    id: "internflow",
+    title: "InternFlow - Internship Tracking Platform",
+    des:
+      "InternFlow streamlines the job search process with real-time updates, analytics, and community-driven insights. Track applications, discover opportunities, and land your dream internship. Built with Next.js, Django, PostgreSQL, Docker.",
+    img: "./projects/Internflow.png",
+    iconLists: ["/next.svg", "/django.svg", "/postgresql.svg", "/docker.svg"],
+    link: "https://github.com/AnupamSingh2004/Internflow",
+    liveLink: null,
+  },
+  {
+    id: "prismeet",
+    title: "Prismeet - Next-Gen Video Meeting Platform",
+    des:
+      "Prismeet revolutionizes remote collaboration with advanced recording, AI-powered insights, and seamless post-meeting workflows. Built for content creators and remote teams. Next.js, Django, Docker, FFmpeg, AI/NLP.",
+    img: "./projects/Prismeet.png",
+    iconLists: ["/next.svg", "/django.svg", "/docker.svg", "/ai.svg"],
+    link: "https://github.com/AnupamSingh2004/Prismeet",
+    liveLink: null,
+  },
+]
+
+// Projects
 export const projects = [
+  {
+    id: "aarogyarekha",
+    title: "AarogyaRekha - AI Health Prediction System 🛡️",
+    des:
+      "AI-powered preventive healthcare system that predicts disease outbreaks (malaria, dengue, diarrhea) using satellite data, climate patterns, and behavioral insights. Built during Hack4Health Hackathon with Flutter, Django, TensorFlow, and satellite APIs.",
+    img: "./projects/AarogyaRekha.png",
+    iconLists: ["/flutter.svg", "/django.svg", "/ai.svg", "/python.svg", "/postgresql.svg"],
+    link: "https://github.com/AnupamSingh2004/AarogyaRekha/",
+    liveLink: null,
+  },
+  {
+    id: "accessibilitypro",
+    title: "AccessibilityPro - WCAG Compliance Platform",
+    des:
+      "A modern, responsive, and accessible React.js application for monitoring and improving website accessibility compliance. Built with Next.js, React, TypeScript, Tailwind CSS.",
+    img: "./projects/Accesebility-Pro.png",
+    iconLists: ["/next.svg", "/react.svg", "/typescript.svg", "/tailwind.svg"],
+    link: "https://github.com/AnupamSingh2004/AccessibilityPro",
+    liveLink: "https://accessibility-pro.vercel.app/",
+  },
   {
     id: 1,
     title: "BigDocs - AI Healthcare Platform",
@@ -89,6 +147,18 @@ export const projects = [
 ]
 
 export const moreProjects = [
+  {
+    quote:
+      "Developed AarogyaRekha during Hack4Health Hackathon - an AI-powered preventive healthcare system predicting disease outbreaks like malaria and dengue using satellite data from Sentinel-2 and MODIS. Built with Flutter, Django, TensorFlow, achieving 99.8% prediction confidence for real-time health risk alerts to rural communities.",
+    name: "AarogyaRekha",
+    title: "AI Health Prediction System - Hackathon Winner",
+  },
+  {
+    quote:
+      "Built a modern WCAG compliance platform for monitoring website accessibility with React.js, TypeScript, and Next.js. Features real-time issue detection, CSV/JSON export capabilities, and comprehensive analytics dashboard serving accessibility professionals worldwide.",
+    name: "AccessibilityPro",
+    title: "WCAG Compliance Platform with Analytics",
+  },
   {
     quote:
       "Developed a comprehensive healthcare platform in 48 hours featuring telemedicine with 1080p video quality, AI-powered disease prediction using custom BERT model achieving 92% accuracy across 100+ diseases, and prescription management handling 1000+ medical records daily.",
@@ -180,7 +250,7 @@ export const skills = {
   frameworks: ["React.js", "Next.js", "Django", "Node.js", "Express.js", "Redux"],
   tools: ["Docker", "Git", "JWT", "Web3.js", "MySQL", "MongoDB", "Supabase", "Redis"],
   platforms: ["AWS", "GCP", "Linux", "Windows"],
-  devops: ["Terraform", "Jenkins", "Kubernetes"],
+  devops: ["Terraform", "Jenkins", "Kubernetes", "Grafana", "SonarQube", "Prometheus", "Ansible", "GitLab CI/CD", "Nginx", "Apache", "Helm", "ArgoCD", "Vault"],
 }
 
 export const socialMedia = [
@@ -219,6 +289,23 @@ export const socialProfiles = [
     url: "https://leetcode.com/u/sanupam2004/",
     icon: "/optimization.svg", // Using optimization icon as LeetCode placeholder
     color: "#FFA116",
+  },
+]
+
+export const certificates = [
+  {
+    id: 1,
+    title: "Introduction to DevOps",
+    provider: "Coursera - IBM",
+    issueDate: "Mar 12, 2025",
+    credentialId: "8YEE0VZCACVY",
+    verificationUrl: "https://coursera.org/verify/8YEE0VZCACVY",
+    description: "Comprehensive course covering DevOps fundamentals, CI/CD pipelines, containerization, and cloud deployment strategies.",
+    skills: ["DevOps", "CI/CD", "Docker", "Kubernetes", "Cloud Computing"],
+    certificateFile: "/certificates/Coursera_intro_to_devops.pdf",
+    certificateImage: "/certificates/IntroductionToDevOps.png",
+    color: "#0056D2", // Coursera blue
+    icon: "🏆",
   },
 ]
 

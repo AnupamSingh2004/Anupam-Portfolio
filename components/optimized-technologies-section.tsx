@@ -84,6 +84,16 @@ const allTechnologies: TechItem[] = [
   { name: "Terraform", category: "devops", x: 0, y: 0, color: categoryColors.devops, logo: "/tech/terraform.png" },
   { name: "Jenkins", category: "devops", x: 0, y: 0, color: categoryColors.devops, logo: "/tech/jenkins.png" },
   { name: "Kubernetes", category: "devops", x: 0, y: 0, color: categoryColors.devops, logo: "/tech/kubernetes.png" },
+  { name: "Grafana", category: "devops", x: 0, y: 0, color: categoryColors.devops, logo: "/tech/grafana.png" },
+  { name: "SonarQube", category: "devops", x: 0, y: 0, color: categoryColors.devops, logo: "/tech/sonarqube.png" },
+  { name: "Prometheus", category: "devops", x: 0, y: 0, color: categoryColors.devops, logo: "/tech/prometheus.png" },
+  { name: "Ansible", category: "devops", x: 0, y: 0, color: categoryColors.devops, logo: "/tech/ansible.png" },
+  { name: "GitLab CI/CD", category: "devops", x: 0, y: 0, color: categoryColors.devops, logo: "/tech/gitlab.png" },
+  { name: "Nginx", category: "devops", x: 0, y: 0, color: categoryColors.devops, logo: "/tech/nginx.png" },
+  { name: "Apache", category: "devops", x: 0, y: 0, color: categoryColors.devops, logo: "/tech/apache.png" },
+  { name: "Helm", category: "devops", x: 0, y: 0, color: categoryColors.devops, logo: "/tech/helm.png" },
+  { name: "ArgoCD", category: "devops", x: 0, y: 0, color: categoryColors.devops, logo: "/tech/argocd.png" },
+  { name: "Vault", category: "devops", x: 0, y: 0, color: categoryColors.devops, logo: "/tech/vault.png" },
 ]
 
 export function OptimizedTechnologiesSection({ setCursorVariant }: OptimizedTechnologiesSectionProps) {

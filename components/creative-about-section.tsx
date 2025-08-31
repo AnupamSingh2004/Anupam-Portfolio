@@ -15,7 +15,7 @@ interface CreativeAboutSectionProps {
 const personalStats = [
   { label: "Projects Completed", value: 15, icon: Code, suffix: "+" },
   { label: "Technologies Mastered", value: 25, icon: Zap, suffix: "+" },
-  { label: "Hackathons Participated", value: 3, icon: Trophy, suffix: "" },
+  { label: "Hackathons Participated", value: 4, icon: Trophy, suffix: "" },
   { label: "Years of Experience", value: 3, icon: Calendar, suffix: "+" },
 ]
 

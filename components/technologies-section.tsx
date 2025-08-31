@@ -62,6 +62,16 @@ const allTechnologies: TechItem[] = [
   { name: "Terraform", category: "devops", x: 0, y: 0, color: categoryColors.devops, icon: "🏗️" },
   { name: "Jenkins", category: "devops", x: 0, y: 0, color: categoryColors.devops, icon: "🔧" },
   { name: "Kubernetes", category: "devops", x: 0, y: 0, color: categoryColors.devops, icon: "⚙️" },
+  { name: "Grafana", category: "devops", x: 0, y: 0, color: categoryColors.devops, icon: "📊" },
+  { name: "SonarQube", category: "devops", x: 0, y: 0, color: categoryColors.devops, icon: "🔍" },
+  { name: "Prometheus", category: "devops", x: 0, y: 0, color: categoryColors.devops, icon: "📈" },
+  { name: "Ansible", category: "devops", x: 0, y: 0, color: categoryColors.devops, icon: "🔀" },
+  { name: "GitLab CI/CD", category: "devops", x: 0, y: 0, color: categoryColors.devops, icon: "🦊" },
+  { name: "Nginx", category: "devops", x: 0, y: 0, color: categoryColors.devops, icon: "🌐" },
+  { name: "Apache", category: "devops", x: 0, y: 0, color: categoryColors.devops, icon: "🪶" },
+  { name: "Helm", category: "devops", x: 0, y: 0, color: categoryColors.devops, icon: "⚓" },
+  { name: "ArgoCD", category: "devops", x: 0, y: 0, color: categoryColors.devops, icon: "🚀" },
+  { name: "Vault", category: "devops", x: 0, y: 0, color: categoryColors.devops, icon: "🔒" },
 ]
 
 export function TechnologiesSection({ setCursorVariant }: TechnologiesSectionProps) {

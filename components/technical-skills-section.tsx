@@ -87,6 +87,16 @@ const skillIcons: Record<string, string> = {
   Terraform: "🏗️",
   Jenkins: "🔧",
   Kubernetes: "⚙️",
+  Grafana: "📊",
+  SonarQube: "🔍",
+  Prometheus: "📈",
+  Ansible: "🔀",
+  "GitLab CI/CD": "🦊",
+  Nginx: "🌐",
+  Apache: "🪶",
+  Helm: "⚓",
+  ArgoCD: "🚀",
+  Vault: "🔒",
 }
 
 export function TechnicalSkillsSection({ setCursorVariant }: TechnicalSkillsSectionProps) {
